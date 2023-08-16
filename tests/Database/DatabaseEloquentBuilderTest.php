@@ -2216,15 +2216,15 @@ class DatabaseEloquentBuilderTest extends TestCase
         $this->assertSame('select * from "users" where "email" = ?', $clone->toSql());
     }
 
-    public function testToRawSql()
+    public function testToRawQuery()
     {
         $query = m::mock(BaseBuilder::class);
-        $query->shouldReceive('toRawSql')
+        $query->shouldReceive('toRawQuery')
             ->andReturn('select * from "users" where "email" = \'foo\'');
 
         $builder = new Builder($query);
 
-        $this->assertSame('select * from "users" where "email" = \'foo\'', $builder->toRawSql());
+        $this->assertSame('select * from "users" where "email" = \'foo\'', $builder->toRawQuery());
     }
 
     protected function mockConnectionForModel($model, $database)

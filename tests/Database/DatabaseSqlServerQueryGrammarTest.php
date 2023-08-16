@@ -14,14 +14,14 @@ class DatabaseSqlServerQueryGrammarTest extends TestCase
         m::close();
     }
 
-    public function testToRawSql()
+    public function testToRawQuery()
     {
         $connection = m::mock(Connection::class);
         $connection->shouldReceive('escape')->with('foo', false)->andReturn("'foo'");
         $grammar = new SqlServerGrammar;
         $grammar->setConnection($connection);
 
-        $query = $grammar->substituteBindingsIntoRawSql(
+        $query = $grammar->substituteBindingsIntoRawQuery(
             "select * from [users] where 'Hello''World?' IS NOT NULL AND [email] = ?",
             ['foo'],
         );

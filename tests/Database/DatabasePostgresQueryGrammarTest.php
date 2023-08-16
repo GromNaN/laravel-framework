@@ -14,14 +14,14 @@ class DatabasePostgresQueryGrammarTest extends TestCase
         m::close();
     }
 
-    public function testToRawSql()
+    public function testToRawQuery()
     {
         $connection = m::mock(Connection::class);
         $connection->shouldReceive('escape')->with('foo', false)->andReturn("'foo'");
         $grammar = new PostgresGrammar;
         $grammar->setConnection($connection);
 
-        $query = $grammar->substituteBindingsIntoRawSql(
+        $query = $grammar->substituteBindingsIntoRawQuery(
             'select * from "users" where \'{}\' ?? \'Hello\\\'\\\'World?\' AND "email" = ?',
             ['foo'],
         );

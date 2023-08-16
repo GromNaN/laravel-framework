@@ -1357,7 +1357,7 @@ class Grammar extends BaseGrammar
      * @param  array  $bindings
      * @return string
      */
-    public function substituteBindingsIntoRawSql($sql, $bindings)
+    public function substituteBindingsIntoRawQuery($sql, $bindings)
     {
         $bindings = array_map(fn ($value) => $this->escape($value), $bindings);
 

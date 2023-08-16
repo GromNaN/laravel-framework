@@ -706,9 +706,9 @@ class PostgresGrammar extends Grammar
      * @param  array  $bindings
      * @return string
      */
-    public function substituteBindingsIntoRawSql($sql, $bindings)
+    public function substituteBindingsIntoRawQuery($sql, $bindings)
     {
-        $query = parent::substituteBindingsIntoRawSql($sql, $bindings);
+        $query = parent::substituteBindingsIntoRawQuery($sql, $bindings);
 
         foreach ($this->operators as $operator) {
             if (! str_contains($operator, '?')) {

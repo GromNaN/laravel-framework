@@ -2640,9 +2640,9 @@ class Builder implements BuilderContract
      *
      * @return string
      */
-    public function toRawSql()
+    public function toRawQuery()
     {
-        return $this->grammar->substituteBindingsIntoRawSql(
+        return $this->grammar->substituteBindingsIntoRawQuery(
             $this->toSql(), $this->connection->prepareBindings($this->getBindings())
         );
     }
@@ -3920,9 +3920,9 @@ class Builder implements BuilderContract
      *
      * @return $this
      */
-    public function dumpRawSql()
+    public function dumpRawQuery()
     {
-        dump($this->toRawSql());
+        dump($this->toRawQuery());
 
         return $this;
     }
@@ -3942,9 +3942,9 @@ class Builder implements BuilderContract
      *
      * @return never
      */
-    public function ddRawSql()
+    public function ddRawQuery()
     {
-        dd($this->toRawSql());
+        dd($this->toRawQuery());
     }
 
     /**

@@ -5663,20 +5663,20 @@ SQL;
         $this->assertEquals([], $clone->getBindings());
     }
 
-    public function testToRawSql()
+    public function testToRawQuery()
     {
         $connection = m::mock(ConnectionInterface::class);
         $connection->shouldReceive('prepareBindings')
             ->with(['foo'])
             ->andReturn(['foo']);
         $grammar = m::mock(Grammar::class)->makePartial();
-        $grammar->shouldReceive('substituteBindingsIntoRawSql')
+        $grammar->shouldReceive('substituteBindingsIntoRawQuery')
             ->with('select * from "users" where "email" = ?', ['foo'])
             ->andReturn('select * from "users" where "email" = \'foo\'');
         $builder = new Builder($connection, $grammar, m::mock(Processor::class));
         $builder->select('*')->from('users')->where('email', 'foo');
 
-        $this->assertSame('select * from "users" where "email" = \'foo\'', $builder->toRawSql());
+        $this->assertSame('select * from "users" where "email" = \'foo\'', $builder->toRawQuery());
     }
 
     protected function getConnection()
