@@ -3636,7 +3636,7 @@ class Builder implements BuilderContract
     /**
      * Get a new instance of the query builder.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return static
      */
     public function newQuery()
     {
@@ -3646,7 +3646,7 @@ class Builder implements BuilderContract
     /**
      * Create a new query instance for a sub-query.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return static
      */
     protected function forSubQuery()
     {
