@@ -323,7 +323,7 @@ trait HasAttributes
             }
 
             if ($this->isEnumCastable($key) && (! ($attributes[$key] ?? null) instanceof Arrayable)) {
-                $attributes[$key] = isset($attributes[$key]) ? $this->getStorableEnumValue($this->getCasts()[$key], $attributes[$key]) : null;
+                $attributes[$key] = isset($attributes[$key]) ? $this->getStorableEnumValue($attributes[$key], $this->getCasts()[$key]) : null;
             }
 
             if ($attributes[$key] instanceof Arrayable) {
@@ -1203,10 +1203,10 @@ trait HasAttributes
         if (! isset($value)) {
             $this->attributes[$key] = null;
         } elseif (is_object($value)) {
-            $this->attributes[$key] = $this->getStorableEnumValue($enumClass, $value);
+            $this->attributes[$key] = $this->getStorableEnumValue($value, $enumClass);
         } else {
             $this->attributes[$key] = $this->getStorableEnumValue(
-                $enumClass, $this->getEnumCaseFromValue($enumClass, $value)
+                $this->getEnumCaseFromValue($enumClass, $value), $enumClass
             );
         }
     }
@@ -1228,11 +1228,11 @@ trait HasAttributes
     /**
      * Get the storable value from the given enum.
      *
-     * @param  string  $expectedEnum
      * @param  \UnitEnum|\BackedEnum  $value
+     * @param  string  $expectedEnum
      * @return string|int
      */
-    protected function getStorableEnumValue($expectedEnum, $value)
+    protected function getStorableEnumValue($value, $expectedEnum)
     {
         if (! $value instanceof $expectedEnum) {
             throw new ValueError(sprintf('Value [%s] is not of the expected enum type [%s].', var_export($value, true), $expectedEnum));
